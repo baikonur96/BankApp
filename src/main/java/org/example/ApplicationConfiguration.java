@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.account.AccountProperties;
 import org.example.account.AccountService;
 import org.example.operations.ConsoleOperationType;
 import org.example.operations.OperationCommandProcessor;
@@ -20,29 +21,6 @@ public class ApplicationConfiguration {
     @Bean
     public Scanner scanner(){
         return new Scanner(System.in);
-    }
-
-    @Bean OperationConsoleListener operationConsoleListener(Scanner scanner,
-                                                            List<OperationCommandProcessor> commandProcessors){
-        Map<ConsoleOperationType, OperationCommandProcessor> map = commandProcessors.stream().collect(
-                Collectors.toMap(
-                        OperationCommandProcessor::getOperationType,
-                        processor -> processor
-                )
-        );
-        return new OperationConsoleListener(scanner, map);
-    }
-
-    @Bean
-    public UserService userService(AccountService accountService){
-        return new UserService(accountService);
-    }
-
-    @Bean
-    public AccountService accountService(
-        @Value("${account.default-amount}") int defaultAccountAmount,
-        @Value("${account.transfer-commission}") double transferCommission){
-        return new AccountService(defaultAccountAmount, transferCommission);
     }
 
 }

@@ -2,9 +2,11 @@ package org.example.user;
 
 import org.example.account.Account;
 import org.example.account.AccountService;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class UserService {
 
     private final Map<Integer, User> userMap;
